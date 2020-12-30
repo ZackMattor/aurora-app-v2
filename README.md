@@ -2,7 +2,7 @@
 
 The Aurora Application. This can be used to manage and configure the Aurora Lighting System.
 
-![Video Demo](https://i.imgur.com/j1YcUT5.mp4)
+https://i.imgur.com/j1YcUT5
 
 ## Installation
 
