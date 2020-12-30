@@ -4,7 +4,7 @@ The Aurora Application. This can be used to manage and configure the Aurora Ligh
 
 https://i.imgur.com/j1YcUT5
 
-## This is part of the Aurora Lighting System
+**This is part of the Aurora Lighting System**
 
 [Aurora Firmware](https://github.com/ZackMattor/aurora-firmware)
 
