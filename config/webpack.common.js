@@ -1,9 +1,10 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const paths = require('./paths')
+const webpack = require('webpack');
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -53,11 +54,17 @@ module.exports = {
       files: ['.', 'src', 'config'],
       formatter: 'table',
     }),
+
+    // VueJS plugin
+    new VueLoaderPlugin(),
   ],
 
   // Determine how modules within the project are treated
   module: {
     rules: [
+      // VueJS single page components
+      { test: /\.vue$/, loader: 'vue-loader' },
+
       // JavaScript: Use Babel to transpile JavaScript files
       { test: /\.js$/, use: ['babel-loader'] },
 

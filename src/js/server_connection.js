@@ -7,6 +7,8 @@ export class ServerConnection {
 
   connect() {
     this.socket = new WebSocket(endpoint);
+
+    // TODO - Reconnect on connection loss
   }
 
   send(data) {
