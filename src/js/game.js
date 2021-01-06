@@ -4,8 +4,9 @@ import sceneFile from '../babylon_files/icosahedron.babylon';
 import { ServerConnection } from './server_connection';
 
 export class Game {
-  constructor() {
-    this.canvas = document.getElementById('gameCanvas');
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.updateInterval = null;
     this.engine = new BABYLON.Engine(this.canvas, true, {
       preserveDrawingBuffer: true,
       stencil: true
@@ -17,9 +18,15 @@ export class Game {
     this.serverConn.connect();
   }
 
+  destroy() {
+    clearInterval(this.updateInterval);
+    this.serverConn.disconnect();
+    this.engine.dispose();
+  }
+
   onResize() {
     this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    this.canvas.height = window.innerHeight - 250;
     this.engine.resize();
   }
 
@@ -99,7 +106,7 @@ export class Game {
   start() {
     let foo = 0;
 
-    setInterval(() => {
+    this.updateInterval = setInterval(() => {
       let mat = this.scene.getMaterialByName('glowMaterial5');
       BABYLON.Color3.HSVtoRGBToRef(foo,0.6,1,mat.emissiveColor);
       foo += 10;

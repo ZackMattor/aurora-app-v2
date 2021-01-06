@@ -6,9 +6,18 @@ export class ServerConnection {
   }
 
   connect() {
+    console.log('Connecting to the server');
     this.socket = new WebSocket(endpoint);
 
     // TODO - Reconnect on connection loss
+  }
+
+  disconnect() {
+    if(this.socket && this.socket.readyState == WebSocket.OPEN) {
+      console.log('Disconnecting from the server');
+      this.socket.close();
+      this.socket = null;
+    }
   }
 
   send(data) {
