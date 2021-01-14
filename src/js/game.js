@@ -76,8 +76,13 @@ export class Game {
     for(const index in pixels) {
       let pixel = pixels[index];
 
+      console.log(`( ${pixel.r},${pixel.g},${pixel.b} )`);
+
       let mat = this.scene.getMaterialByName(`glowMaterial${index}`);
-      BABYLON.Color3.HSVtoRGBToRef(pixel.r, pixel.g, pixel.b, mat.emissiveColor);
+
+      mat.emissiveColor.r = pixel.r;
+      mat.emissiveColor.g = pixel.g;
+      mat.emissiveColor.b = pixel.b;
     }
 
     this.sendState();

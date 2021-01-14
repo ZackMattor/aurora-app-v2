@@ -1,7 +1,7 @@
 import Home from './pages/home.vue';
-import Icosahedron from './pages/icosahedron.vue';
+import AnimationBuilder from './pages/animation_builder.vue';
 
 export const routes = [
   { path: '/', component: Home },
-  { path: '/icosahedron', component: Icosahedron },
+  { path: '/animation_builder', component: AnimationBuilder },
 ];

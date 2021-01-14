@@ -1,6 +1,6 @@
 <template>
   <div class="page-home">
-    <router-link to="/icosahedron">Icosahedron</router-link>
+    <router-link to="/animation_builder">Animation Builder</router-link>
   </div>
 </template>
 
