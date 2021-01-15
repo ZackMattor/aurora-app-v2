@@ -1,3 +1,4 @@
+//import 'tailwindcss/tailwind.css';
 import './styles/index.scss';
 import { routes } from './js/routes.js';
 import Vue from 'vue';

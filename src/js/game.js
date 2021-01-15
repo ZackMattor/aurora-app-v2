@@ -31,6 +31,7 @@ export class Game {
 
   async loadScene() {
     let scene = await BABYLON.SceneLoader.LoadAsync('', sceneFile.replace('/', ''), this.engine);
+    scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
     this.glowMaterials = [];
 
     for(let i=0; i<20; i++) {
