@@ -1,7 +1,4 @@
 import './styles/index.scss';
-import { Game } from './js/game';
+//import 'tailwindcss/tailwind.css';
 
-const game = new Game();
-game.loadScene().then(() => {
-  game.start();
-});
+import './js/app.js';
