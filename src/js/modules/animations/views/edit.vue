@@ -18,7 +18,7 @@ import IcosahedronRenderer from '../components/renderers/icosahedron.vue';
 
 export default {
   mounted() {
-    this.animationInterval = setInterval(this.renderLoop.bind(this), 1000);
+    this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/30);
 
     // Initialize the pixel state
     for(let i=0; i<this.numPixels; i++) {
@@ -35,29 +35,44 @@ export default {
       pixel_state: [],
       selected_pixels: [],
       currentFrame: 0,
-      currentRenderer: 'icosahedron-renderer'
+      currentRenderer: 'icosahedron-renderer',
+      lastFrameAt: null,
     };
   },
 
   methods: {
+    // TODO - figure out how to do easing functions between frames
+    //        cutover, linear, etc
     renderLoop() {
       if(this.animation) {
-        let frameId = this.animation.timeline[this.currentFrame].frameId;
-        let frameData = this.frameById(frameId).data;
-        console.log(frameData[0]);
+        // Initialize the timestamp of the last rendered frame
+        if(!this.lastFrameAt) { this.lastFrameAt = (+ new Date()); }
 
+        // Calculate the time since the last frame to now
+        let dt = (+ new Date()) - this.lastFrameAt;
+
+        let timelineSegment = this.animation.timeline[this.currentFrame];
+        let frameId = timelineSegment.frameId;
+        let frame = this.frameById(frameId);
+
+        // Set the current pixel state to that of the desired frame
         for(let i=0; i<this.numPixels; i++) {
-          let pixel = frameData[i];
+          let pixel = frame.data[i];
 
           this.pixel_state[i].r = pixel.r;
           this.pixel_state[i].g = pixel.g;
           this.pixel_state[i].b = pixel.b;
         }
 
-        this.currentFrame++;
+        // Detect if it's time to move on to the next frame
+        if(dt > timelineSegment.duration) {
+          this.currentFrame++;
+          this.lastFrameAt = (+ new Date());
 
-        if(this.currentFrame === this.frameCount) {
-          this.currentFrame = 0;
+          // If we've run out of frames move to the next one
+          if(this.currentFrame === this.frameCount) {
+            this.currentFrame = 0;
+          }
         }
       }
     }

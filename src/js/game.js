@@ -50,10 +50,8 @@ export class Game {
     gl.intensity = 0.15;
 
     scene.meshes.forEach((m)=> {
-      console.log(m.name);
       let match = m.name.match(/(\d+)_surface/);
       if(match) {
-        console.log(this.glowMaterials[parseInt(match[1])-1]);
         m.material = this.glowMaterials[parseInt(match[1])-1];
       } else {
         m.material = darkMaterial;
@@ -76,8 +74,6 @@ export class Game {
   setPixelState(pixels) {
     for(const index in pixels) {
       let pixel = pixels[index];
-
-      console.log(`( ${pixel.r},${pixel.g},${pixel.b} )`);
 
       let mat = this.scene.getMaterialByName(`glowMaterial${index}`);
 
