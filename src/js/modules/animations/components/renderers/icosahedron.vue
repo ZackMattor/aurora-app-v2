@@ -18,6 +18,7 @@ export default {
       this.game.setPixelState(this.pixelState);
     });
   },
+
   beforeDestroy() {
     this.game.destroy();
   },

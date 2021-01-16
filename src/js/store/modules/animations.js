@@ -24,6 +24,10 @@ export default {
   getters: {
     getByGeometry: (state) => (geometry) => {
       return state.all.filter(item => item.geometry === geometry);
+    },
+
+    getById: (state) => (id) => {
+      return state.all.find(item => item.id == id);
     }
   },
 
