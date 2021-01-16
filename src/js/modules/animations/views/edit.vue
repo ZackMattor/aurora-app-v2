@@ -13,17 +13,17 @@ export default {
   mounted() {
     const num_pixels = this.$refs.renderer.num_pixels;
 
-    for(let i=0; i<num_pixels; i++) {
-      this.pixel_state.push({r:Math.random(),g:Math.random(),b:Math.random()});
-    }
+    //for(let i=0; i<num_pixels; i++) {
+    //  this.pixel_state.push({r:Math.random(),g:Math.random(),b:Math.random()});
+    //}
 
-    setInterval(() => {
-      for(let i=0; i<num_pixels; i++) {
-        this.pixel_state[i].r = Math.random();
-        this.pixel_state[i].g = Math.random();
-        this.pixel_state[i].b = Math.random();
-      }
-    }, 1000);
+    //setInterval(() => {
+    //  for(let i=0; i<num_pixels; i++) {
+    //    this.pixel_state[i].r = Math.random();
+    //    this.pixel_state[i].g = Math.random();
+    //    this.pixel_state[i].b = Math.random();
+    //  }
+    //}, 1000);
   },
 
   data() {

@@ -1,6 +1,10 @@
-// Welcome to the aurora app... I'm going to spew some ideas here on the vision of what this is going to be.
-//
-// - Please select your aurora light
-//    Icosahedron
-//    BookShelf
-//
+import Vue from 'vue';
+import store from './store/index.js';
+import router from './router.js';
+import App from './app.vue';
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app');
