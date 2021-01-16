@@ -5,9 +5,11 @@ export default {
     all: [{
       key: 'icosahedron',
       name: 'Icosahedron',
+      icon: 'fas fa-dice-d20',
     }, {
       key: 'bookcase_5_20',
       name: 'Bookcase 5x20',
+      icon: 'fas fa-bars',
     }]
   }),
 

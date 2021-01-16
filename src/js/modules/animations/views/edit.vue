@@ -5,6 +5,7 @@
 
     <component ref="renderer" :pixel-state='pixel_state' :selected-pixels='selected_pixels' :is="currentRenderer" />
 
+    <animator-widget :timeline="animation.timeline" />
     <div class="text-center">
       <p>there are {{frameCount}} frames...</p>
       <p>We are on frame {{currentFrame}}</p>
@@ -15,10 +16,11 @@
 <script>
 import { mapState, mapGetters } from 'vuex';
 import IcosahedronRenderer from '../components/renderers/icosahedron.vue';
+import AnimatorWidget from '../components/animator_widget.vue';
 
 export default {
   mounted() {
-    this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/30);
+    this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/100);
 
     // Initialize the pixel state
     for(let i=0; i<this.numPixels; i++) {
@@ -97,11 +99,12 @@ export default {
 
     numPixels() {
       return this.$refs.renderer.num_pixels;
-    }
+    },
   },
 
   components: {
-    'icosahedron-renderer': IcosahedronRenderer
+    'icosahedron-renderer': IcosahedronRenderer,
+    'animator-widget': AnimatorWidget
   }
 }
 </script>
