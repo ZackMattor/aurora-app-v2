@@ -1,6 +1,6 @@
 <template>
   <div class="page-icosahedron">
-    <h1 class="text-center text-3xl">{{animation.name}} Animation</h1>
+    <h1 class="text-center text-3xl">{{animation.name}}</h1>
 
     <component ref="renderer" :pixel-state='pixelState' :selected-pixels='selectedPixels' :is="currentRenderer" />
 
