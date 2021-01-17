@@ -14,9 +14,48 @@ export default {
         },
         {
           frameId: 1,
-          duration: 500,
+          duration: 1000,
           easing: 'cutover'
         }
+      ]
+    }, {
+      id: 1,
+      name: 'Random',
+      geometry: 'icosahedron',
+      timeline: [
+        {
+          frameId: 3,
+          duration: 500,
+          easing: 'cutover'
+        }, {
+          frameId: 4,
+          duration: 1000,
+          easing: 'cutover'
+        }, {
+          frameId: 5,
+          duration: 2000,
+          easing: 'cutover'
+        }, {
+          frameId: 6,
+          duration: 20000,
+          easing: 'cutover'
+        }, {
+          frameId: 3,
+          duration: 40000,
+          easing: 'cutover'
+        }, {
+          frameId: 4,
+          duration: 750,
+          easing: 'cutover'
+        }, {
+          frameId: 5,
+          duration: 750,
+          easing: 'cutover'
+        }, {
+          frameId: 6,
+          duration: 500,
+          easing: 'cutover'
+        },
       ]
     }]
   }),
