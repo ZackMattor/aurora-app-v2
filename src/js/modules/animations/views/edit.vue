@@ -1,15 +1,10 @@
 <template>
   <div class="page-icosahedron">
-    <router-link to="/">Back...</router-link>
     <h1 class="text-center text-3xl">{{animation.name}} Animation</h1>
 
-    <component ref="renderer" :pixel-state='pixel_state' :selected-pixels='selected_pixels' :is="currentRenderer" />
+    <component ref="renderer" :pixel-state='pixelState' :selected-pixels='selected_pixels' :is="currentRenderer" />
 
-    <animator-widget :timeline="animation.timeline" />
-    <div class="text-center">
-      <p>there are {{frameCount}} frames...</p>
-      <p>We are on frame {{currentFrame}}</p>
-    </div>
+    <animator-widget @frameData="pixelState = $event" :timeline="animation.timeline" class="fixed w-full bottom-12" />
   </div>
 </template>
 
@@ -20,11 +15,11 @@ import AnimatorWidget from '../components/animator_widget.vue';
 
 export default {
   mounted() {
-    this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/100);
+    //this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/100);
 
     // Initialize the pixel state
     for(let i=0; i<this.numPixels; i++) {
-      this.pixel_state.push({r:Math.random(),g:Math.random(),b:Math.random()});
+      this.pixelState.push({ r: 0, g: 0, b: 0 });
     }
   },
 
@@ -34,11 +29,10 @@ export default {
 
   data() {
     return {
-      pixel_state: [],
+      pixelState: [],
       selected_pixels: [],
       currentFrame: 0,
       currentRenderer: 'icosahedron-renderer',
-      lastFrameAt: null,
     };
   },
 
@@ -61,9 +55,9 @@ export default {
         for(let i=0; i<this.numPixels; i++) {
           let pixel = frame.data[i];
 
-          this.pixel_state[i].r = pixel.r;
-          this.pixel_state[i].g = pixel.g;
-          this.pixel_state[i].b = pixel.b;
+          this.pixelState[i].r = pixel.r;
+          this.pixelState[i].g = pixel.g;
+          this.pixelState[i].b = pixel.b;
         }
 
         // Detect if it's time to move on to the next frame
