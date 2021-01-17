@@ -1,6 +1,6 @@
 <template>
   <span>
-    <template v-if="duration">{{minutes}}:{{seconds}}:{{milliseconds}}</template>
+    <template v-if="duration !== null">{{minutes}}:{{seconds}}:{{milliseconds}}</template>
     <template v-else>--:--:--</template>
   </span>
 </template>
@@ -14,7 +14,7 @@ export default {
       let durationStr = "000" + this.duration.toString();
       let lng = durationStr.length;
 
-      return durationStr.slice(lng-3, lng-1);
+      return durationStr.slice(lng-3, lng);
     },
 
     seconds() {
@@ -26,8 +26,11 @@ export default {
     },
 
     minutes() {
-      Math.floor(this.duration / 60000);
-      return "00";
+      let minutes = Math.floor(this.duration / 60000);
+      let minutesStr = "00" + minutes.toString();
+      let lng = minutesStr.length;
+
+      return minutesStr.slice(lng-2, lng);
     }
   }
 }

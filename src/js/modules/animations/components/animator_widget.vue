@@ -79,7 +79,6 @@ export default {
 
       // Detect if it's time to move on to the next frame
       if(dt > timelineSegment.duration) {
-        console.log('Frame Progressing!');
         this.selectedFrameIndex++;
         this.lastFrameAt = (+ new Date());
 
@@ -127,10 +126,6 @@ export default {
   watch: {
     selectedFrameIndex() {
       this.sendCurrentFrame();
-    },
-
-    animationTimestamp() {
-      console.log(this.animationTimestamp);
     }
   },
 
