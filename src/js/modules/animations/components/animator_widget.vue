@@ -2,7 +2,7 @@
   <div class="">
     <div class="border-solid border-2 border-gray-400 mb-2">
       <controls @play="onPlay" @pause="onPause" />
-      <timeline @frameData="$emit('frameData', $event)" :timeline="timeline" />
+      <timeline :selectedFrameIndex="selectedFrameIndex" @selectedFrame="onSelectedFrame" :timeline="timeline" />
     </div>
   </div>
 </template>
@@ -10,27 +10,49 @@
 <script>
 import timeline from './animator/timeline.vue';
 import controls from './animator/controls.vue';
-import store from './animator/store.js';
-import vuex from 'vuex';
+import { mapState, mapGetters } from 'vuex';
+//import store from './animator/store.js';
+//import vuex from 'vuex';
 
 export default {
   // Value is the current pixel state...
   props: ['timeline'],
 
   mounted() {
-    this.store = new Vuex.store(state );
+    // IDEA: should we have a more central store per animator widget?
+    //this.store = new Vuex.store(state );
+    this.onSelectedFrame(0);
   },
 
   data() {
     return {
-      store: null
+      //store: null,
+      currentTime: null,
+      selectedFrameIndex: null
     };
   },
 
   methods: {
-    onPlay() { },
+    onPlay() {
+      
+    },
 
-    onPause() { }
+    onPause() {
+      
+    },
+
+    onSelectedFrame(index) {
+      this.selectedFrameIndex = index;
+      
+      let frameData = this.frameById(index).data;
+      this.$emit('frameData', frameData);
+    }
+  },
+
+  computed: {
+    ...mapGetters('frames', {
+      frameById: 'getById'
+    }),
   },
 
   components: {

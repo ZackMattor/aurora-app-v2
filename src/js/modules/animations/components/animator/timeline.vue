@@ -10,19 +10,12 @@
 
 <script>
 import TimelineFrame from './timeline_frame.vue';
-import { mapState, mapGetters } from 'vuex';
 
 export default {
-  props: ['timeline'],
-
-  mounted() {
-    this.selectedFrameIndex = 0;
-  },
+  props: ['timeline', 'selectedFrameIndex'],
 
   data() {
     return {
-      selectedFrameIndex: null,
-
       // Animation Vars
       currentTime: null,
       lastFrameAt: null,
@@ -31,19 +24,7 @@ export default {
 
   methods: {
     timelineFrameSelected(index) {
-      this.selectedFrameIndex = index;
-
-      this.$emit('frameData', this.frameById(index).data);
-    }
-  },
-
-  computed: {
-    ...mapGetters('frames', {
-      frameById: 'getById'
-    }),
-
-    currentFrame() {
-      return this.timeline[this.selectedFrameIndex];
+      this.$emit('selectedFrame', index);
     }
   },
 

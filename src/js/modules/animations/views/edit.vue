@@ -18,9 +18,9 @@ export default {
     //this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/100);
 
     // Initialize the pixel state
-    for(let i=0; i<this.numPixels; i++) {
-      this.pixelState.push({ r: 0, g: 0, b: 0 });
-    }
+    //for(let i=0; i<this.numPixels; i++) {
+    //  this.pixelState.push({ r: 0, g: 0, b: 0 });
+    //}
   },
 
   beforeDestroy() {
@@ -39,39 +39,39 @@ export default {
   methods: {
     // TODO - figure out how to do easing functions between frames
     //        cutover, linear, etc
-    renderLoop() {
-      if(this.animation) {
-        // Initialize the timestamp of the last rendered frame
-        if(!this.lastFrameAt) { this.lastFrameAt = (+ new Date()); }
+    //renderLoop() {
+    //  if(this.animation) {
+    //    // Initialize the timestamp of the last rendered frame
+    //    if(!this.lastFrameAt) { this.lastFrameAt = (+ new Date()); }
 
-        // Calculate the time since the last frame to now
-        let dt = (+ new Date()) - this.lastFrameAt;
+    //    // Calculate the time since the last frame to now
+    //    let dt = (+ new Date()) - this.lastFrameAt;
 
-        let timelineSegment = this.animation.timeline[this.currentFrame];
-        let frameId = timelineSegment.frameId;
-        let frame = this.frameById(frameId);
+    //    let timelineSegment = this.animation.timeline[this.currentFrame];
+    //    let frameId = timelineSegment.frameId;
+    //    let frame = this.frameById(frameId);
 
-        // Set the current pixel state to that of the desired frame
-        for(let i=0; i<this.numPixels; i++) {
-          let pixel = frame.data[i];
+    //    // Set the current pixel state to that of the desired frame
+    //    for(let i=0; i<this.numPixels; i++) {
+    //      let pixel = frame.data[i];
 
-          this.pixelState[i].r = pixel.r;
-          this.pixelState[i].g = pixel.g;
-          this.pixelState[i].b = pixel.b;
-        }
+    //      this.pixelState[i].r = pixel.r;
+    //      this.pixelState[i].g = pixel.g;
+    //      this.pixelState[i].b = pixel.b;
+    //    }
 
-        // Detect if it's time to move on to the next frame
-        if(dt > timelineSegment.duration) {
-          this.currentFrame++;
-          this.lastFrameAt = (+ new Date());
+    //    // Detect if it's time to move on to the next frame
+    //    if(dt > timelineSegment.duration) {
+    //      this.currentFrame++;
+    //      this.lastFrameAt = (+ new Date());
 
-          // If we've run out of frames move to the next one
-          if(this.currentFrame === this.frameCount) {
-            this.currentFrame = 0;
-          }
-        }
-      }
-    }
+    //      // If we've run out of frames move to the next one
+    //      if(this.currentFrame === this.frameCount) {
+    //        this.currentFrame = 0;
+    //      }
+    //    }
+    //  }
+    //}
   },
 
   computed: {
@@ -79,21 +79,21 @@ export default {
       animationById: 'getById'
     }),
 
-    ...mapGetters('frames', {
-      frameById: 'getById'
-    }),
+    //...mapGetters('frames', {
+    //  frameById: 'getById'
+    //}),
 
     animation() {
       return this.animationById(this.$route.params.id);
     },
 
-    frameCount() {
-      return this.animation.timeline.length;
-    },
+    //frameCount() {
+    //  return this.animation.timeline.length;
+    //},
 
-    numPixels() {
-      return this.$refs.renderer.num_pixels;
-    },
+    //numPixels() {
+    //  return this.$refs.renderer.num_pixels;
+    //},
   },
 
   components: {
