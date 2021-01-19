@@ -8,7 +8,10 @@
                :selected-pixels='selectedPixels'
                @faceClick='onFaceClick' />
 
-    <animator-widget @frameData="pixelState = $event" :timeline="animation.timeline" class="fixed w-full bottom-12" />
+    <animator-widget @frameData="pixelState = $event"
+                     :timeline="animation.timeline"
+                     :selected-pixels='selectedPixels'
+                     class="fixed w-full bottom-12" />
   </div>
 </template>
 

@@ -3,6 +3,7 @@
     <div class="border-solid border-2 border-gray-400 mb-2">
       <controls @play="play"
                 @pause="pause"
+                @colorPicked="onColorPick"
                 :duration="animationTimestamp" />
 
       <timeline :selectedFrameIndex="selectedFrameIndex"
@@ -15,11 +16,11 @@
 <script>
 import timeline from './animator/timeline.vue';
 import controls from './animator/controls.vue';
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 
 export default {
   // Value is the current pixel state...
-  props: ['timeline'],
+  props: ['timeline', 'selectedPixels'],
 
   mounted() {
     this.onSelectedFrame(0);
@@ -41,11 +42,14 @@ export default {
       selectedFrameIndex: null,
 
       // The handler for the animation interval
-      animationInterval: null
+      animationInterval: null,
     };
   },
 
   methods: {
+    ...mapMutations('frames', {
+      setFrameColor: 'setColor'
+    }),
     play() {
       this.animationInterval = setInterval(this.renderLoop.bind(this), 1000/100);
     },
@@ -65,12 +69,11 @@ export default {
       this.animationTimestamp = this.timestampOfSelectedFrame + dt;
 
       let timelineSegment = this.timeline[this.selectedFrameIndex];
-      let frameId = timelineSegment.frameId;
-      let frame = this.frameById(frameId);
+      let currentFrame = this.frameById(timelineSegment.frameId);
 
       // Set the current pixel state to that of the desired frame
       for(let i=0; i<this.numPixels; i++) {
-        let pixel = frame.data[i];
+        let pixel = currentFrame.data[i];
 
         this.pixelState[i].r = pixel.r;
         this.pixelState[i].g = pixel.g;
@@ -97,8 +100,25 @@ export default {
 
     sendCurrentFrame() {
       let timelineFrame = this.timeline[this.selectedFrameIndex];
-      let frameData = this.frameById(timelineFrame.frameId).data;
-      this.$emit('frameData', frameData);
+      let currentFrame = this.frameById(timelineFrame.frameId);
+
+      this.$emit('frameData', currentFrame.data);
+    },
+
+    onColorPick(color) {
+      console.log('Commit the color to selections');
+
+      let timelineFrame = this.timeline[this.selectedFrameIndex];
+
+      this.selectedPixels.forEach((pixelIndex) => {
+        this.setFrameColor({
+          id: timelineFrame.frameId,
+          ledId: pixelIndex - 1,
+          color: color
+        });
+      });
+
+      this.sendCurrentFrame();
     }
   },
 

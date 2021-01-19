@@ -31,6 +31,7 @@ export default {
 
   getters: {
     getById: (state) => (id) => {
+      console.log('wattt');
       return state.all.find(item => item.id == id);
     }
   },
@@ -40,6 +41,12 @@ export default {
   },
 
   mutations: {
+    setColor(state, payload) {
+      //let id = payload.id;
+      let ledId = payload.ledId;
+      let color = payload.color;
 
+      state.all[2].data[ledId] = color;
+    }
   }
 };
