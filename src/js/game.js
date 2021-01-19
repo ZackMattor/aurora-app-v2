@@ -25,7 +25,7 @@ export class Game {
 
   onResize() {
     this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight - 250;
+    this.canvas.height = window.innerHeight / 2;
     this.engine.resize();
   }
 
