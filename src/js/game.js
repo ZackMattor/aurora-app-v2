@@ -29,8 +29,25 @@ export class Game {
     this.engine.resize();
   }
 
+  onFaceClick(id) {
+    console.info(`No implementor for face click (${id})`);
+  }
+
   async loadScene() {
     let scene = await BABYLON.SceneLoader.LoadAsync('', sceneFile.replace('/', ''), this.engine);
+    this.scene = scene;
+
+    scene.onPointerObservable.add((eventData) => {
+      if (eventData.type == 32) {
+        let mesh = eventData.pickInfo.pickedMesh;
+
+        if(mesh && mesh.id.match(/\d\d_surface/)) {
+          let id = parseInt(mesh.id.slice(0, 2));
+          this.onFaceClick(id);
+        }
+      }
+    });
+
     this.highlightLayer = new BABYLON.HighlightLayer('hl1');
     scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
     this.glowMaterials = [];
@@ -46,7 +63,6 @@ export class Game {
 
     scene.createDefaultCamera(true, true, true);
 
-    this.scene = scene;
     let gl = new BABYLON.GlowLayer('glow', scene);
     gl.intensity = 0.15;
 

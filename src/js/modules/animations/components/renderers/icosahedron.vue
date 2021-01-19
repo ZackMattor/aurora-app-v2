@@ -16,6 +16,10 @@ export default {
     this.game.loadScene().then(() => {
       this.game.start();
       this.game.setPixelState(this.pixelState);
+
+      this.game.onFaceClick = (id) => {
+        this.$emit('faceClick', id);
+      };
     });
   },
 

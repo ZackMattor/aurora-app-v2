@@ -2,7 +2,11 @@
   <div class="page-icosahedron">
     <h1 class="text-center text-3xl">{{animation.name}}</h1>
 
-    <component ref="renderer" :pixel-state='pixelState' :selected-pixels='selectedPixels' :is="currentRenderer" />
+    <component ref="renderer"
+               :is="currentRenderer"
+               :pixel-state='pixelState'
+               :selected-pixels='selectedPixels'
+               @faceClick='onFaceClick' />
 
     <animator-widget @frameData="pixelState = $event" :timeline="animation.timeline" class="fixed w-full bottom-12" />
   </div>
@@ -22,13 +26,17 @@ export default {
     };
   },
 
-  mounted() {
-    let foo = 0;
+  methods: {
+    onFaceClick(id) {
+      // If the face is not selected, select it
+      if(this.selectedPixels.indexOf(id) === -1) {
+        this.selectedPixels.push(id);
 
-    setInterval(() => {
-      this.selectedPixels = [ ( foo%20 ) + 1 ];
-      foo++;
-    }, 1000);
+      // If the face is already selected, deselect it
+      } else {
+        this.selectedPixels = this.selectedPixels.filter((p) => p !== id);
+      }
+    }
   },
 
   computed: {
