@@ -22,6 +22,15 @@ export default {
     };
   },
 
+  mounted() {
+    let foo = 0;
+
+    setInterval(() => {
+      this.selectedPixels = [ ( foo%20 ) + 1 ];
+      foo++;
+    }, 1000);
+  },
+
   computed: {
     ...mapGetters('animations', {
       animationById: 'getById'

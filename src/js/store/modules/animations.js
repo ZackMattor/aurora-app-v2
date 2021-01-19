@@ -25,7 +25,7 @@ export default {
       timeline: [
         {
           frameId: 3,
-          duration: 500,
+          duration: 1000,
           easing: 'cutover'
         }, {
           frameId: 4,
@@ -33,19 +33,19 @@ export default {
           easing: 'cutover'
         }, {
           frameId: 5,
-          duration: 2000,
+          duration: 1000,
           easing: 'cutover'
         }, {
           frameId: 6,
-          duration: 20000,
+          duration: 1000,
           easing: 'cutover'
         }, {
           frameId: 3,
-          duration: 40000,
+          duration: 1000,
           easing: 'cutover'
         }, {
           frameId: 4,
-          duration: 750,
+          duration: 1000,
           easing: 'cutover'
         }, {
           frameId: 5,

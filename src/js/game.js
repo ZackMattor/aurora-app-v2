@@ -31,6 +31,7 @@ export class Game {
 
   async loadScene() {
     let scene = await BABYLON.SceneLoader.LoadAsync('', sceneFile.replace('/', ''), this.engine);
+    this.highlightLayer = new BABYLON.HighlightLayer('hl1');
     scene.clearColor = new BABYLON.Color4(0,0,0,0.0000000000000001);
     this.glowMaterials = [];
 
@@ -83,6 +84,22 @@ export class Game {
     }
 
     this.sendState();
+  }
+
+  setSelectedState(faces) {
+    this.scene.meshes.forEach((m) => this.highlightLayer.removeMesh(m));
+
+    for(const face of faces) {
+      let id = face < 10 ? '0' + face : face;
+      let m = this.scene.meshes.find((m) => m.id === `${id}_surface`);
+
+      if(m) {
+        this.highlightLayer.addMesh(m, BABYLON.Color3.Yellow());
+      } else {
+        console.error('No mesh found for that face!');
+      }
+    }
+
   }
 
   start() {

@@ -30,6 +30,14 @@ export default {
       handler(val) {
         this.game.setPixelState(this.pixelState);
       }
+    },
+
+    selectedPixels: {
+      deep: true,
+
+      handler(val) {
+        this.game.setSelectedState(this.selectedPixels);
+      }
     }
   }
 }
