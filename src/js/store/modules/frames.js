@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 export default {
   namespaced: true,
 
@@ -40,6 +42,12 @@ export default {
   },
 
   mutations: {
+    setColor(state, payload) {
+      let id = payload.id - 1;
+      let ledId = payload.ledId;
+      let color = payload.color;
 
+      Vue.set(state.all[id].data, ledId, color);
+    }
   }
 };
