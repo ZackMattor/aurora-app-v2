@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 export default {
   namespaced: true,
 
@@ -31,7 +33,6 @@ export default {
 
   getters: {
     getById: (state) => (id) => {
-      console.log('wattt');
       return state.all.find(item => item.id == id);
     }
   },
@@ -42,11 +43,11 @@ export default {
 
   mutations: {
     setColor(state, payload) {
-      //let id = payload.id;
+      let id = payload.id - 1;
       let ledId = payload.ledId;
       let color = payload.color;
 
-      state.all[2].data[ledId] = color;
+      Vue.set(state.all[id].data, ledId, color);
     }
   }
 };

@@ -106,12 +106,10 @@ export default {
     },
 
     onColorPick(color) {
-      console.log('Commit the color to selections');
-
       let timelineFrame = this.timeline[this.selectedFrameIndex];
 
       this.selectedPixels.forEach((pixelIndex) => {
-        this.setFrameColor({
+        this.$store.commit('frames/setColor', {
           id: timelineFrame.frameId,
           ledId: pixelIndex - 1,
           color: color
