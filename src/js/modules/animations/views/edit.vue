@@ -17,15 +17,43 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import axios from 'axios';
 import IcosahedronRenderer from '../components/renderers/icosahedron.vue';
 import AnimatorWidget from '../components/animator_widget.vue';
 
 export default {
+  async mounted() {
+    let lights = await axios.get('http://10.0.0.20:8080/api/lights');
+
+    this.icosahedron_light = lights?.data?.find(l => l.geometry_name === 'icosahedron');
+
+    if(this.icosahedron_light) {
+      console.log(this.icosahedron_light);
+      axios.post(`http://10.0.0.20:8080/api/lights/${this.icosahedron_light.id}/animation`, {
+          id: 'PassthroughState'
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+    }
+  },
+
+  async unmounted() {
+    console.log('BYE');
+    if(this.icosahedron_light) {
+      axios.post(`http://10.0.0.20:8080/api/lights/${this.icosahedron_light.id}/animation`, {
+          id: 'HueWalker'
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+    }
+  },
+
   data() {
     return {
       pixelState: [],
       selectedPixels: [],
       currentRenderer: 'icosahedron-renderer',
+      icosahedron_light: null,
     };
   },
 
