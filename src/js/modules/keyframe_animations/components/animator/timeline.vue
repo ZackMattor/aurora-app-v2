@@ -2,6 +2,7 @@
   <div class="border-solid border-2 border-gray-400 flex flex-row flex-nowrap overflow-y-scroll p-4">
     <timeline-frame
       v-for="( timelineFrame, index ) in timeline"
+      :key="timelineFrame.frameId"
       :is-selected="selectedFrameIndex === index"
       @selected="timelineFrameSelected(index)"
       :timeline-frame="timelineFrame" />

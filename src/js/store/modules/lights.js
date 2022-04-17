@@ -1,27 +1,33 @@
+import axios from 'axios';
+
 export default {
   namespaced: true,
 
   state: () => ({
-    all: [{
-      param: '30:AE:A4:DD:94:A0',
-      name: 'Wall Icosahedron',
-      geometry: 'icosahedron',
-    },{
-      param: '30:AE:A4:DD:94:A1',
-      name: 'Office Bookshelf',
-      geometry: 'bookcase_5_20',
-    }]
+    all: []
   }),
 
   getters: {
+    all(state) {
+      return state.all;
+    },
 
+    find: (state) => (id) => {
+      return state.all.find((l) => ( l.id === id ));
+    },
   },
 
   actions: {
+    async fetch({ commit }) {
+      let lights = (await axios.get('http://10.0.0.20:8080/api/v1/lights')).data;
 
+      commit('setLights', lights);
+    }
   },
 
   mutations: {
-
+    setLights(state, lights) {
+      state.all = lights;
+    }
   }
 };
