@@ -71,7 +71,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('animations', {
+    ...mapGetters('keyframeAnimations', {
       animationById: 'getById'
     }),
 

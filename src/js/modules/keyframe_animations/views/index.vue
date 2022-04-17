@@ -1,6 +1,6 @@
 <template>
   <ul class="flex flex-col p-4">
-    <li v-for="geometry in geometries" class="border-gray-400 flex flex-row mb-2">
+    <li v-for="geometry in geometries" :key="geometry.name" class="border-gray-400 flex flex-row mb-2">
       <div class="select-none border-4 border-solid border-gray-400 rounded-md flex flex-1 items-center p-4">
         <div class="flex flex-col w-full">
           <div class="flex flex-1 items-center">
@@ -13,7 +13,7 @@
           </div>
 
           <div class="flex flex-col">
-            <router-link v-for="animation in animationsByGeometry(geometry.key)" :to="`/animations/${animation.id}/edit`" class="border-solid border-2 border-gray-400 mt-4 flex flex-1 p-3">{{ animation.name }}</router-link>
+            <router-link v-for="animation in animationsByGeometry(geometry.key)" :key="animation.id" :to="`/keyframe_animations/${animation.id}/edit`" class="border-solid border-2 border-gray-400 mt-4 flex flex-1 p-3">{{ animation.name }}</router-link>
             <p class="border-solid border-2 border-gray-400 mt-4 flex flex-1 p-3"><span><i class="fas fa-plus"></i> Add New Animation</span></p>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default {
       geometryByKey: 'getByKey'
     }),
 
-    ...mapGetters('animations', {
+    ...mapGetters('keyframeAnimations', {
       animationsByGeometry: 'getByGeometry'
     })
   }

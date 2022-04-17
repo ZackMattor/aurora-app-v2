@@ -6,7 +6,7 @@
 
         <div class="flex-1 pl-1 mr-15">
           <div class="font-medium text-xl">{{ light.id }}</div>
-          <div class="text-gray-600 text-sm">{{ animationsByGeometry(light.geometry_name).length }} Animations</div>
+          <div class="text-gray-600 text-sm">{{ animationsByGeometry(light.geometry_name).length }} Keyframe Animations</div>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@ export default {
       return geo ? geo.icon : 'fas fa-question';
     },
 
-    ...mapState('animations', {
+    ...mapState('keyframeAnimations', {
       animations: state => state.all
     }),
 
@@ -38,7 +38,7 @@ export default {
       geometryByKey: 'getByKey'
     }),
 
-    ...mapGetters('animations', {
+    ...mapGetters('keyframeAnimations', {
       animationsByGeometry: 'getByGeometry'
     })
   }

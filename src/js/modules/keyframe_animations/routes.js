@@ -3,12 +3,12 @@ import AnimationEdit from './views/edit.vue';
 
 export default [
   {
-    path: '/animations',
+    path: '/keyframe_animations',
     component: AnimationsIndex,
   },
   {
-    path: '/animations/:id/edit',
+    path: '/keyframe_animations/:id/edit',
     component: AnimationEdit,
-    name: 'animation_edit_path'
+    name: 'keyframe_animation_edit_path'
   },
 ];

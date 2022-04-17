@@ -19,8 +19,7 @@ export default {
 
   actions: {
     async fetch({ commit }) {
-
-      let lights = (await axios.get('http://10.0.0.20:8080/api/lights')).data;
+      let lights = (await axios.get('http://10.0.0.20:8080/api/v1/lights')).data;
 
       commit('setLights', lights);
     }
