@@ -15,7 +15,6 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import axios from 'axios';
 
 export default {
   props: ['light'],
